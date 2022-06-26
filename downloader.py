@@ -5,11 +5,14 @@ from datetime import datetime
 
 # Variables, (Lists) and Sets
 log = open('log.txt', "a")
-moods, genres, tracks, bpm, pages, vocals, order, duration, tagsList  = ([] for i in range(9))
-sort = ["neutral-pop91"]
+moods, genres, tracks, bpm, pages, vocals, duration, tagsList  = ([] for i in range(8))
+sort = "neutral-pop91"
+order = ""
 userfolder = "E-Downloader"
 Path = "./" 
 typed = ""
+debug = False
+persist = False
 
 MOODS = set([
   "Angry", "Busy & Frantic", "Changing Tempo", "Chasing", "Dark", "Dreamy", "Eccentric", "Elegant", "Epic", "Euphoric", "Fear", "Floating", "Funny", "Glamorous", "Happy", "Heavy & Ponderous", "Hopeful", "Laid Back", "Marching", "Mysterious", "Peaceful", "Quirky", "Relaxing", "Restless", "Romantic", "Running", "Sad", "Scary", "Sentimental", "Sexy", "Smooth", "Sneaking", "Suspense", "Weird"
@@ -75,11 +78,15 @@ while typed != "run":
         case [a, b]:
           duration = [a,b]
     case "order" | "ord" | "o":
-      if isIn(breadth, SORT):
-        order = urllib.parse.quote_plus(breadth)
+      if (breadth[0]) in (ORDER):
+        order = urllib.parse.quote_plus(str(breadth[0]))
+      else:
+        print("Invalid arguments!")
     case "sort" | "srt" | "st" | "s":
-      if isIn(breadth, SORT):
-        sort = [urllib.parse.quote_plus(breadth)]
+      if (breadth[0]) in (SORT):
+        sort = urllib.parse.quote_plus(str(breadth[0]))
+      else:
+        print("Invalid arguments!")
     case "tracks" | "amount" | "number" | "tlen" | "tamt" | "t":
       match breadth:
         case [a]:
@@ -107,16 +114,18 @@ while typed != "run":
         print("Started operation!")
     case "name" | "nm" | "nam" | "n":
         userfolder = breadth[0]
+    case "debug" | "fix" | "json" | "request" | "url":
+      debug = True
+    case "remain" | "stayopen" | "so" | "persist":
+      persist = True
     case _:
         print("Not Recognized: {}".format(command))
-
+    
 # Create tags for all gathered information
-try: tagsList.append("?sort={}".format(sort[-1]));
-except IndexError: pass
+if (sort != ""): tagsList.append("?sort={}".format(sort));
 try: tagsList.append("&vocals={}".format(vocals[-1]))
 except IndexError: pass
-try: tagsList.append("&order={}".format(order[-1]))
-except IndexError: pass
+if (order != ""): tagsList.append("&order={}".format(order))
 try: tagsList.append("&bpm={}-{}".format(bpm[-2],bpm[-1]))
 except IndexError: pass
 try: tagsList.append("&length={}-{}".format(duration[-2],duration[-1]))
@@ -129,25 +138,27 @@ tags = ''.join(tagsList)
 
 # Create the folder
 folder = removeUnsupportedSymbols(
-    '{} {}'.format(userfolder,' '.join(moods),' '.join(genres)))
+    '{} {} Music'.format(userfolder,' '.join(moods),' '.join(genres)))
 try: 
     os.makedirs(Path + folder) 
     flog('Folder Created: {}'.format(folder))
 except FileExistsError: pass
 
 # Begin iterating sequences
-tracked, paged = 0
-curTrack, curPage = 1
+tracked, paged = (0 for i in range(2))
+curTrack, curPage = (1 for i in range(2))
 for pg in pages:
     paged = int(pg)
 for tr in tracks:
     tracked = int(tr)
 if (tracked == 0):
     paged = 1
+jsonUrl = 'https://www.epidemicsound.com/json/search/tracks/{}&{}'
+if (debug):
+  print(jsonUrl.format(tags,"debug"))
 while (curTrack <= tracked) | (curPage <= paged) :
     resp = requests.get(
-        'https://www.epidemicsound.com/json/search/tracks/{}&{}'
-        .format(tags, "page={}".format(curPage))
+        jsonUrl.format(tags, "page={}".format(curPage))
     )
     for track in resp.json()['entities']['tracks'].values():
         if (curTrack <= tracked) | (curPage <= paged):
@@ -185,3 +196,10 @@ while (curTrack <= tracked) | (curPage <= paged) :
     curPage += 1
 log.close()
 print(' ')
+if (persist):
+  input("[0/2] Persist Mode selected. Press enter 2 times to exit.")
+  input("[1/2] Persist Mode selected. Press enter 1 more time to exit.")
+  print("[2/2]")
+else: 
+  print("Closing in 5 seconds.")
+  time.sleep(5)
