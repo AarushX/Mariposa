@@ -5,7 +5,7 @@ from datetime import datetime
 
 # Variables, (Lists) and Sets
 log = open('log.txt', "a")
-moods, genres, tracks, bpm, pages, vocals, order, duration, tagsList  = []
+moods, genres, tracks, bpm, pages, vocals, order, duration, tagsList  = ([] for i in range(9))
 sort = ["neutral-pop91"]
 userfolder = "E-Downloader"
 Path = "./" 
@@ -55,7 +55,7 @@ while typed != "run":
           moods.append(urllib.parse.quote_plus(item))
         else:
           print("Invalid Mood!")
-    case "genre" | "gen" | "g":
+    case "genre" | "genr" | "gen" | "g":
       for item in breadth:
         if (item in GENRES) | (item in SUBGENRES):
           genres.append(urllib.parse.quote_plus(item))
@@ -66,15 +66,15 @@ while typed != "run":
         bpm.append(urllib.parse.quote_plus(item))
     case "vocals" | "voice" | "voz" | "v":
       vocals.append(True)
-    case "instrumentals" | "novoice" | "instruments" | "sound" | "inst" | "in" | "i":
+    case "instrumentals" | "novoice" | "instruments" | "sound" | "inst" | "i":
       vocals.append(False)
-    case "duration" | "time" | "length" | "len" | "tm" | "dur" | "d" | "l" | "i":
+    case "duration" | "time" | "length" | "len" | "tm" | "dur" | "d" | "l":
       match breadth:
         case [a]:
           duration = [0,a]
         case [a, b]:
           duration = [a,b]
-    case "order" | "ord":
+    case "order" | "ord" | "o":
       if isIn(breadth, SORT):
         order = urllib.parse.quote_plus(breadth)
     case "sort" | "srt" | "st" | "s":
@@ -86,22 +86,26 @@ while typed != "run":
           tracks.append(a)
         case [a, b]:
           match b:
-            case "p" | "pages" | "full":
+            case "-p" | "pages" | "full":
               pages.append(a)
-            case "t" | "tracks":
+            case "-t" | "tracks":
               tracks.append(a)
             case _:
               print("Not a valid argument: {}".format(b))
+    case "pages" | "pgs" | "pg" | "p":
+      pages.append(breadth)
     case "genres" | "gens":
         print(GENRES)
         print("For subgenres, enter \'subs\' or \'flist\'")
+    case "moods" | "ms":
+      print(MOODS)
     case "subs" | "subgenres":
         print(SUBGENRES)
     case "list" | "flist" | "full" | "all" | "f":
         print("Moods: \n\t{}\n\nGenres: \n\t{}\nSubgenres: \n\t{}\n\nSorts: \n\t{}".format(MOODS,GENRES,SUBGENRES,SORT))
-    case "run":
+    case "run" | "rn" | "r":
         print("Started operation!")
-    case "name":
+    case "name" | "nm" | "nam" | "n":
         userfolder = breadth[0]
     case _:
         print("Not Recognized: {}".format(command))
