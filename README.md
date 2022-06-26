@@ -1,5 +1,7 @@
-# E-Downloader
-A quick and easy CLI (currently) downloader based in python.
+# Epidemic Sound Downloader CLI
+A quick and easy CLI (currently) downloader for Epidemic Sound based in python.\
+*Make sure to have a license when using this music anywhere!*\
+[Epidemic Sound](https://www.epidemicsound.com)
 
 ## Installation 
 Download and unzip zip file into a folder.
