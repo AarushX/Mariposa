@@ -4,7 +4,7 @@ Docs coming soon! However, here are some quick commands.
 
 **Mood:**
 Sets mood of the matched songs
->>> mood (mood1) (mood2) [mood...]
+mood (mood1) (mood2) [mood...]
 Aliases: mod, md, m
 **Genre:**
 Sets the songs' genres
