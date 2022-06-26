@@ -14,22 +14,13 @@ Then, navigate to that directory and run:
 ```python
 pip install -r requirements.txt
 ```
-
-Run **downloader.py**!
-## Essential Commands
-**Run:**
-Sets the project up, downloads files, and imports metadata
-```bash 
-run
+## Wiki
 ```
-*Aliase*: rn, r
-
-**Name:**
-Name the folder identifier that the folder is named
-```bash 
-name (folder name)
+https://github.com/AarushX/E-Downloader/wiki
 ```
-*Aliases*: nam, nm, n
-
-
-[Inspired by,](https://github.com/Shatilova/Epidemic-Sound-Albums-Downloader) and some URL code from @Shatilova
+[The E-Downloader Wiki](https://github.com/AarushX/E-Downloader/wiki)
+## Credits
+```
+Inspiration and some codebase from Shatilova
+```
+[Inspired by](https://github.com/Shatilova/Epidemic-Sound-Albums-Downloader) Shatilova
