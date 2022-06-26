@@ -1,6 +1,13 @@
 # E-Downloader
 A quick and easy CLI (currently) downloader based in python.
-Docs coming soon! However, here are some quick commands.
+
+## Installation 
+Download and unzip zip file into a folder.
+Then, run:
+```python
+pip install -r requirements.txt
+```
+Run **downloader.py**!
 
 **Mood:**
 Sets mood of the matched songs
