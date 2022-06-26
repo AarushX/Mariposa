@@ -4,8 +4,9 @@ A quick and easy CLI (currently) downloader for Epidemic Sound based in python.\
 [Epidemic Sound](https://www.epidemicsound.com)
 
 ## Installation 
+***Make sure to use python 3.10+***
 Download and unzip zip file into a folder.
-Then, run:
+Then, navigate to that directory and run:
 ```python
 pip install -r requirements.txt
 ```
@@ -140,3 +141,6 @@ name (folder name)
 ```bash
 "asc", "desc"
 ```
+
+
+[Inspired by,](https://github.com/Shatilova/Epidemic-Sound-Albums-Downloader) and some URL code from @Shatilova
