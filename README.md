@@ -1,5 +1,7 @@
 # E-Downloader
-A quick and easy CLI (currently) downloader based in python.
-Docs coming soon! However, here are some quick commands.
 
-mood | genre | name 
+This program is a simple downloader, currently based on the JSON REST api for Epidemic Sound
+
+    mood (mood) (mood_2) [mood...]
+
+    mood (mood) (mood_2) [mood...]
