@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 ## Wiki
 ```
-https://github.com/AarushX/E-Downloader/wiki
+https://github.com/AarushX/EpidemicDX/wiki
 ```
 [The E-Downloader Wiki](https://github.com/AarushX/EpidemicDX/wiki)
 ## Credits
