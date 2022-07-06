@@ -5,7 +5,7 @@ A quick and easy CLI (currently) downloader for Epidemic Sound based in python.\
 *Make sure to have a license when using this music anywhere!*\
 [Epidemic Sound](https://www.epidemicsound.com)
 
-![Python](https://img.shields.io/badge/-Made%20in%20Python-eb5234?logo=python&logoColor=fff) ![](https://visitor-badge.glitch.me/badge?page_id=aarushx,e-downloader) 
+![Python](https://img.shields.io/badge/-Made%20in%20Python-eb5234?logo=python&logoColor=fff) ![](https://visitor-badge.glitch.me/badge?page_id=aarushx,epidemixdx) 
 ## Installation 
 <img src="http://mobileimages.lowes.com/productimages/36dee6f7-6acd-42a9-bb5d-f994138ea37e/04938596.jpg" alt="A hammer" width="15%" align="right" left="20px"></img>
 ***Make sure to use [python 3.10+](https://www.python.org/downloads/)***
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ```
 https://github.com/AarushX/E-Downloader/wiki
 ```
-[The E-Downloader Wiki](https://github.com/AarushX/E-Downloader/wiki)
+[The E-Downloader Wiki](https://github.com/AarushX/EpidemicDX/wiki)
 ## Credits
 ```
 Inspiration and some codebase from Shatilova
