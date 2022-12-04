@@ -8,11 +8,12 @@ log = open('log.txt', "a")
 moods, genres, tracks, bpm, pages, vocals, duration, tagsList  = ([] for i in range(8))
 sort = "neutral-pop91"
 order = ""
-userfolder = "E-Downloader"
+userfolder = "Epidemic"
 Path = "./" 
 typed = ""
 debug = False
 persist = False
+keepImage = False
 
 MOODS = set([
   "Angry", "Busy & Frantic", "Changing Tempo", "Chasing", "Dark", "Dreamy", "Eccentric", "Elegant", "Epic", "Euphoric", "Fear", "Floating", "Funny", "Glamorous", "Happy", "Heavy & Ponderous", "Hopeful", "Laid Back", "Marching", "Mysterious", "Peaceful", "Quirky", "Relaxing", "Restless", "Romantic", "Running", "Sad", "Scary", "Sentimental", "Sexy", "Smooth", "Sneaking", "Suspense", "Weird"
@@ -34,7 +35,7 @@ ORDER = set([
 ])
 
 # Functions
-def flog(item,delim="\n",log=log):
+def formatLog(item,delim="\n",log=log):
     print(item)
     log.write("{}{}".format(item,delim)) 
 def removeUnsupportedSymbols(filename):
@@ -50,43 +51,77 @@ def isIn(item, set):
 # Create a CLI to gather information
 while typed != "run":
   typed = input(">>> ")
-  command, *breadth = typed.split()
+  command, *breadth = typed.split() 
   match command:
+#   Mood: Sets mood of the matched songs
+#     mood (mood1) (mood2) [mood...]
+#       Aliases: mod, md, m
     case "mood" | "mod" | "md" | "m":
       for item in breadth:
         if item in MOODS:
           moods.append(urllib.parse.quote_plus(item))
         else:
           print("Invalid Mood!")
+
+#   Genre: Sets the songs' genres
+#     genre (genre1) (genre2) [genre...]
+#       Aliases: genr, gen, g
     case "genre" | "genr" | "gen" | "g":
       for item in breadth:
         if (item in GENRES) | (item in SUBGENRES):
           genres.append(urllib.parse.quote_plus(item))
         else:
           print("Invalid Genre / Subgenre!") 
+
+#   BPM: Sets the songs' beats per minutes range
+#     bpm (bpm min) (bpm max)
+#       Aliases: speed, beats, b
     case "bpm" | "speed" | "beats" | "b":
       for item in breadth:
         bpm.append(urllib.parse.quote_plus(item))
+
+#   Find songs with vocals
+#     vocals
+#       Aliases: voice, voz, v
     case "vocals" | "voice" | "voz" | "v":
       vocals.append(True)
+
+#   Vocals Settings: Find songs without vocals
+#     instrumentals
+#       Aliases: novoice, instruments, inst, sound, i
     case "instrumentals" | "novoice" | "instruments" | "sound" | "inst" | "i":
       vocals.append(False)
+
+#   Duration: Sets the songs' time range
+#     duration (minimum seconds [optional]) (max seconds)
+#       Aliases: time, length, len, tm, dur, d, l
     case "duration" | "time" | "length" | "len" | "tm" | "dur" | "d" | "l":
       match breadth:
         case [a]:
           duration = [0,a]
         case [a, b]:
           duration = [a,b]
+#   Order: Sets the songs' downloading order
+#     order (order type)
+#       Aliases: ord, o
     case "order" | "ord" | "o":
       if (breadth[0]) in (ORDER):
         order = urllib.parse.quote_plus(str(breadth[0]))
       else:
         print("Invalid arguments!")
+
+#   Sort: Sets the songs' sorting order
+#     sort (sort type)
+#       Aliases: srt, st, s
     case "sort" | "srt" | "st" | "s":
       if (breadth[0]) in (SORT):
         sort = urllib.parse.quote_plus(str(breadth[0]))
       else:
         print("Invalid arguments!")
+
+#   Tracks: Sets the amount of songs to download
+#     tracks (amount) [-p page amounts] [-t track amounts]
+#       Aliases: amount, number, tlen, tamt, t
     case "tracks" | "amount" | "number" | "tlen" | "tamt" | "t":
       match breadth:
         case [a]:
@@ -141,7 +176,7 @@ folder = removeUnsupportedSymbols(
     '{} {} Music'.format(userfolder,' '.join(moods),' '.join(genres)))
 try: 
     os.makedirs(Path + folder) 
-    flog('Folder Created: {}'.format(folder))
+    formatLog('Folder Created: {}'.format(folder))
 except FileExistsError: pass
 
 # Begin iterating sequences
@@ -188,10 +223,10 @@ while (curTrack <= tracked) | (curPage <= paged) :
           atg.images.set(3, open(picFilename, 'rb').read(), 'image/jpeg')
           atg.save(version=eyed3.id3.ID3_V2_3)
           # Remove the un-needed image
-          os.remove(picFilename)
-          ##Will Be Deprecated Soon##
+          if (keepImage == False): 
+            os.remove(picFilename)
           information = '{} || {} >> {} | {} - {}'.format(curTrack, int(time.time()), datetime.now(), trackAuthor, trackName)
-          flog('{}'.format(information))
+          formatLog('{}'.format(information))
           curTrack += 1
     curPage += 1
 log.close()
