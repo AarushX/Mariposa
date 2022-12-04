@@ -1,8 +1,8 @@
 <img src = "https://cdn.iconscout.com/icon/free/png-64/download-1851078-1569228.png" alt="downloader jpg" width=10% align="right"/>
 
-# Epidemic Sound Downloader CLI
-A quick and easy CLI (currently) downloader for Epidemic Sound based in python.\
-*Make sure to have a license when using this music anywhere!*\
+# Mariposa
+A quick and easy CLI (currently) downloader for Epidemic Sound, (spotify, youtube, soundcloud) based in python.\
+*Make sure to have a license when using Epidemic music anywhere!*\
 [Epidemic Sound](https://www.epidemicsound.com)
 
 ![Python](https://img.shields.io/badge/-Made%20in%20Python-eb5234?logo=python&logoColor=fff) ![](https://visitor-badge.glitch.me/badge?page_id=aarushx,epidemixdx) 
@@ -16,11 +16,11 @@ pip3 install -r requirements.txt
 ```
 ## Wiki
 ```
-https://github.com/AarushX/EpidemicDX/wiki
+https://github.com/AarushX/Mariposa/wiki
 ```
-[The E-Downloader Wiki](https://github.com/AarushX/EpidemicDX/wiki)
+[The E-Downloader Wiki](https://github.com/AarushX/Mariposa/wiki)
 ## Credits
 ```
-Inspiration and some codebase from Shatilova
+Inspiration and some code from Shatilova
 ```
 [Inspired by](https://github.com/Shatilova/Epidemic-Sound-Albums-Downloader) Shatilova
