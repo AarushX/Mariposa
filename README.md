@@ -12,7 +12,7 @@ A quick and easy CLI (currently) downloader for Epidemic Sound based in python.\
 Download and unzip zip file into a folder.
 Then, navigate to that directory and run:
 ```python
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 ## Wiki
 ```
